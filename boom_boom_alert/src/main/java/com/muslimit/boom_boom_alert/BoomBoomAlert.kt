@@ -69,6 +69,7 @@ class BoomBoomAlert (val activity: Activity){
         var alert = AlertDialog.Builder(activity)
         alert.setView(quitview)
         val myDialog = alert.create()
+        if (icon == 0)quitview.quit_image.visibility = View.GONE else quitview.quit_logo.setImageResource(icon)
         quitview.message.text = "Dear user, are you sure want to quit $appname"
         quitview.yes_2.setOnClickListener { activity.finish() }
         quitview.no_2.setOnClickListener { myDialog.dismiss() }
