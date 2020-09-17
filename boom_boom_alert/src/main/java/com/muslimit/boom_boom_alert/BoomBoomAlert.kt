@@ -9,6 +9,9 @@ import android.graphics.drawable.ColorDrawable
 import android.view.LayoutInflater
 import android.view.View
 import kotlinx.android.synthetic.main.show_alert_popup.view.*
+import kotlinx.android.synthetic.main.show_alert_popup.view.message
+import kotlinx.android.synthetic.main.show_alert_popup.view.title
+import kotlinx.android.synthetic.main.single_choice_alert.view.*
 
 
 /**
@@ -50,6 +53,39 @@ class BoomBoomAlert (internal val context: Context, internal var alertType:Int, 
         val TYPE_ALERT = 3
         val TYPE_FILE = 4
         val TYPE_INTERNET_FAIL = 5
+
+    }
+}
+
+class BoomBoomSingleChoiceAlert(activity: Activity,title:String, message: String,var icon:Int = 0,var buttonOk:String = "Ok",var buttonCancel:String = "Cancel" ){
+
+    init {
+        view = LayoutInflater.from(activity).inflate(R.layout.single_choice_alert,null,false)
+        var alert = AlertDialog.Builder(activity)
+        alert.setView(view)
+        view.title.text = if (title != "") title else ""
+//        view.title.setTextColor(when(alertType){1->context.resources.getColor(R.color.success_color) else->context.resources.getColor(R.color.failure_color)})
+        view.message.text = if (message != "") message else ""
+        view.yes.text = "YES"
+        view.cancel.text = "CANCEL"
+        if (view.success.visibility == View.GONE && view.cancel.visibility == View.GONE) alert.setCancelable(true) else alert.setCancelable(false)
+//        view.image.setImageResource(when(alertType){1->R.drawable.ic_suc 2->R.drawable.ic_error 3->R.drawable.ic_ialert 4->R.drawable.ic_warning else->R.drawable.ic_no_sig})
+        messageDialog = alert.create()
+        messageDialog.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        if (messageDialog.isShowing){
+            messageDialog.dismiss()}
+        messageDialog.show()
+    }
+
+    companion object{
+        lateinit var view: View
+        lateinit var messageDialog: Dialog
+        val yes
+            get() = view.yes
+        val no
+            get() = view.no
+        val dialog
+            get() = messageDialog
 
     }
 }
