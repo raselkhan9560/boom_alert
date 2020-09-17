@@ -12,6 +12,7 @@ import kotlinx.android.synthetic.main.show_alert_popup.view.*
 import kotlinx.android.synthetic.main.show_alert_popup.view.message
 import kotlinx.android.synthetic.main.show_alert_popup.view.title
 import kotlinx.android.synthetic.main.single_choice_alert.view.*
+import kotlinx.android.synthetic.main.alert_views.view.*
 
 
 /**
@@ -53,7 +54,7 @@ class BoomBoomAlert (val activity: Activity){
 //        view.title.setTextColor(when(alertType){1->context.resources.getColor(R.color.success_color) else->context.resources.getColor(R.color.failure_color)})
         view.message.text = if (message != "") message else ""
         view.yes.text = "YES"
-        view.cancel.text = "CANCEL"
+        view.no.text = "CANCEL"
         if (view.success.visibility == View.GONE && view.cancel.visibility == View.GONE) alert.setCancelable(true) else alert.setCancelable(false)
 //        view.image.setImageResource(when(alertType){1->R.drawable.ic_suc 2->R.drawable.ic_error 3->R.drawable.ic_ialert 4->R.drawable.ic_warning else->R.drawable.ic_no_sig})
         messageDialog = alert.create()
@@ -61,6 +62,18 @@ class BoomBoomAlert (val activity: Activity){
         if (messageDialog.isShowing){
             messageDialog.dismiss()}
         messageDialog.show()
+    }
+
+    fun quitMessage(activity: Activity, icon:Int,appname:String){
+        val quitview = LayoutInflater.from(activity).inflate(R.layout.single_choice_alert,null,false)
+        var alert = AlertDialog.Builder(activity)
+        alert.setView(quitview)
+        val myDialog = alert.create()
+        quitview.message.text = "Dear user, are you sure want to quit $appname"
+        quitview.yes_2.setOnClickListener { activity.finish() }
+        quitview.no_2.setOnClickListener { myDialog.dismiss() }
+        myDialog.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        myDialog.show()
     }
     companion object{
         lateinit var view: View
