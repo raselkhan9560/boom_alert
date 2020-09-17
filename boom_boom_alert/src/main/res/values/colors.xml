@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="premium_color">#FF5722</color>
+
+    <color name="yes">#F44336</color>
+    <color name="no">#68BB6D</color>
+
+
+    <color name="success_color">#25AE88</color>
+    <color name="failure_color">#D75A4A</color>
+</resources>

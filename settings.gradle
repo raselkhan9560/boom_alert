@@ -1,0 +1,3 @@
+include ':boom_boom_alert'
+include ':app'
+rootProject.name = "AlertPlugin"
