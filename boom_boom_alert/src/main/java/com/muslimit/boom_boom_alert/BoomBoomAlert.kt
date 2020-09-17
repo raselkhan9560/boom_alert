@@ -64,7 +64,7 @@ class BoomBoomAlert (val activity: Activity){
         messageDialog.show()
     }
 
-    fun quitMessage(activity: Activity, icon:Int,appname:String){
+    fun quitMessage(icon:Int,appname:String){
         val quitview = LayoutInflater.from(activity).inflate(R.layout.single_choice_alert,null,false)
         var alert = AlertDialog.Builder(activity)
         alert.setView(quitview)
