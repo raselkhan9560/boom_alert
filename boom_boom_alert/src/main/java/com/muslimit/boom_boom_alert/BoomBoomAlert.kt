@@ -45,7 +45,7 @@ class BoomBoomAlert (val activity: Activity){
     }
 
     @SuppressLint("InflateParams")
-    fun DeleteAlert(title:String? = "", message:String,yesButton:String = "YES", noButton:String = "NO", isCancelForFinish:Boolean = true){
+    fun DeleteAlert(title:String? = "Confirmation", message:String,yesButton:String = "YES", noButton:String = "NO", isCancelForFinish:Boolean = true){
         val mTitle = title
         val mYesButton = yesButton
         val mNoButton = noButton

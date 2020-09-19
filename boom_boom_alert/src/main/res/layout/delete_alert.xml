@@ -21,6 +21,8 @@
                 android:layout_width="100dp"
                 android:layout_height="100dp"
                 android:layout_margin="20dp"
+                app:lottie_autoPlay="true"
+                app:lottie_loop="true"
                 app:lottie_rawRes="@raw/delete_lottie"/>
             <TextView
                 android:id="@+id/delete_title"
