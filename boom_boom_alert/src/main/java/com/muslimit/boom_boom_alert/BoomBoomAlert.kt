@@ -1,5 +1,6 @@
 package com.muslimit.boom_boom_alert
 
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.app.AlertDialog
 import android.app.Dialog
@@ -13,6 +14,7 @@ import kotlinx.android.synthetic.main.show_alert_popup.view.message
 import kotlinx.android.synthetic.main.show_alert_popup.view.title
 import kotlinx.android.synthetic.main.single_choice_alert.view.*
 import kotlinx.android.synthetic.main.alert_views.view.*
+import kotlinx.android.synthetic.main.delete_alert.view.*
 
 
 /**
@@ -42,19 +44,38 @@ class BoomBoomAlert (val activity: Activity){
         messageDialog.show()
     }
 
-    fun Single_Alert(title:String, message: String,icon:Int = 0,buttonOk:String = "Ok",buttonCancel:String = "Cancel" ){
-        var okButton = buttonOk
-        var cancelButton = buttonCancel
+    @SuppressLint("InflateParams")
+    fun DeleteAlert(title:String? = "", message:String,yesButton:String = "YES", noButton:String = "NO", isCancelForFinish:Boolean = true){
+        val mTitle = title
+        val mYesButton = yesButton
+        val mNoButton = noButton
+        val mCancelSelect = isCancelForFinish
+        view = LayoutInflater.from(activity).inflate(R.layout.delete_alert,null,false)
+        val alert = AlertDialog.Builder(activity)
+        alert.setView(view)
+        val dialog = alert.create()
+        view.delete_message.text = message
+        view.delete_yes.text = mYesButton
+        view.delete_no.text = mNoButton
+        if(!mCancelSelect) view.delete_no.setOnClickListener { dialog.dismiss() }
+        dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        dialog.show()
+    }
+
+    @SuppressLint("InflateParams")
+    fun Single_Alert(title:String, message: String, icon:Int = 0, buttonOk:String = "Ok", buttonCancel:String = "Cancel" ){
+        val okButton = buttonOk
+        val cancelButton = buttonCancel
         var myIcon = icon
 
         view = LayoutInflater.from(activity).inflate(R.layout.single_choice_alert,null,false)
-        var alert = AlertDialog.Builder(activity)
+        val alert = AlertDialog.Builder(activity)
         alert.setView(view)
         view.title.text = if (title != "") title else ""
 //        view.title.setTextColor(when(alertType){1->context.resources.getColor(R.color.success_color) else->context.resources.getColor(R.color.failure_color)})
         view.message.text = if (message != "") message else ""
-        view.yes.text = "YES"
-        view.no.text = "CANCEL"
+        view.yes.text = okButton
+        view.no.text = cancelButton
         if (view.success.visibility == View.GONE && view.cancel.visibility == View.GONE) alert.setCancelable(true) else alert.setCancelable(false)
 //        view.image.setImageResource(when(alertType){1->R.drawable.ic_suc 2->R.drawable.ic_error 3->R.drawable.ic_ialert 4->R.drawable.ic_warning else->R.drawable.ic_no_sig})
         messageDialog = alert.create()
@@ -89,6 +110,10 @@ class BoomBoomAlert (val activity: Activity){
             get() = view.yes
         val no
             get() = view.no
+        val deleteYes
+            get() = view.delete_yes
+        val deleteNo
+            get() = view.delete_no
         val TYPE_SUCCESS = 1
         val TYPE_FAILURE = 2
         val TYPE_ALERT = 3
