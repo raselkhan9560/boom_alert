@@ -10,7 +10,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         button.setOnClickListener {
-            BoomBoomAlert(this).DeleteAlert(message="Are you sure want to delete?")
+            BoomBoomAlert(this).quitMessage(R.mipmap.ic_launcher,resources.getString(R.string.app_name))
         }
     }
 }

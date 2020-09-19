@@ -7,6 +7,7 @@ import android.app.Dialog
 import android.content.Context
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import kotlinx.android.synthetic.main.show_alert_popup.view.*
@@ -86,13 +87,18 @@ class BoomBoomAlert (val activity: Activity){
         messageDialog.show()
     }
 
-    fun quitMessage(icon:Int,appname:String){
-        val quitview = LayoutInflater.from(activity).inflate(R.layout.single_choice_alert,null,false)
+    fun quitMessage(icon:Int = 0,appname:String,yes:String = "YES",no:String = "NO"){
+        val mIcon = icon
+        val mYes = yes
+        val mNo = no
+        val quitview = LayoutInflater.from(activity).inflate(R.layout.alert_views,null,false)
         var alert = AlertDialog.Builder(activity)
         alert.setView(quitview)
         val myDialog = alert.create()
-        if (icon == 0)quitview.quit_image.visibility = View.GONE else quitview.quit_logo.setImageResource(icon)
-        quitview.message.text = "Dear user, are you sure want to quit $appname"
+        if (mIcon == 0)quitview.quit_image.visibility = View.GONE else quitview.quit_logo.setImageResource(mIcon)
+        quitview.quit_message.text = "Dear user, are you sure want to quit $appname ?"
+        quitview.yes_2.text = mYes
+        quitview.no_2.text = mNo
         quitview.yes_2.setOnClickListener { activity.finish() }
         quitview.no_2.setOnClickListener { myDialog.dismiss() }
         myDialog.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
