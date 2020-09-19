@@ -54,6 +54,7 @@ class BoomBoomAlert (val activity: Activity){
         val alert = AlertDialog.Builder(activity)
         alert.setView(view)
         val dialog = alert.create()
+        view.delete_title.text = mTitle
         view.delete_message.text = message
         view.delete_yes.text = mYesButton
         view.delete_no.text = mNoButton
