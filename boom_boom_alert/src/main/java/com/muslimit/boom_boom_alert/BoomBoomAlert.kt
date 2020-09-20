@@ -46,7 +46,7 @@ class BoomBoomAlert (val activity: Activity){
     }
 
     @SuppressLint("InflateParams")
-    fun DeleteAlert(title:String? = "Confirmation", message:String,yesButton:String = "YES", noButton:String = "NO", isCancelForFinish:Boolean = true){
+    fun DeleteAlert(title:String? = "Confirmation", message:String,yesButton:String = "YES", noButton:String = "NO", isCancelForFinish:Boolean = false){
         val mTitle = title
         val mYesButton = yesButton
         val mNoButton = noButton
@@ -55,30 +55,33 @@ class BoomBoomAlert (val activity: Activity){
         val alert = AlertDialog.Builder(activity)
         alert.setView(view)
         val dialog = alert.create()
-        view.delete_title.text = mTitle
-        view.delete_message.text = message
-        view.delete_yes.text = mYesButton
-        view.delete_no.text = mNoButton
-        if(!mCancelSelect) view.delete_no.setOnClickListener { dialog.dismiss() }
+        view.apply {
+            this.delete_title.text = mTitle
+            this.delete_message.text = message
+            this.delete_yes.text = mYesButton
+            this.delete_no.text = mNoButton
+            if(!mCancelSelect) this.delete_no.setOnClickListener { dialog.dismiss() }
+        }
+
         dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         dialog.show()
     }
 
     @SuppressLint("InflateParams")
-    fun Single_Alert(title:String, message: String, icon:Int = 0, buttonOk:String = "Ok", buttonCancel:String = "Cancel" ){
+    fun Single_Alert(title:String = "", message: String, icon:Int = 0, buttonOk:String = "Ok", buttonCancel:String = "Cancel" ){
         val okButton = buttonOk
         val cancelButton = buttonCancel
         var myIcon = icon
-
+        val mTitle = title
         view = LayoutInflater.from(activity).inflate(R.layout.single_choice_alert,null,false)
         val alert = AlertDialog.Builder(activity)
         alert.setView(view)
-        view.title.text = if (title != "") title else ""
+        if(mTitle == "") view.title.visibility = View.GONE else view.title.text = if (title != "") title else ""
 //        view.title.setTextColor(when(alertType){1->context.resources.getColor(R.color.success_color) else->context.resources.getColor(R.color.failure_color)})
         view.message.text = if (message != "") message else ""
         view.yes.text = okButton
         view.no.text = cancelButton
-        if (view.success.visibility == View.GONE && view.cancel.visibility == View.GONE) alert.setCancelable(true) else alert.setCancelable(false)
+//        if (view.success.visibility == View.GONE && view.cancel.visibility == View.GONE) alert.setCancelable(true) else alert.setCancelable(false)
 //        view.image.setImageResource(when(alertType){1->R.drawable.ic_suc 2->R.drawable.ic_error 3->R.drawable.ic_ialert 4->R.drawable.ic_warning else->R.drawable.ic_no_sig})
         messageDialog = alert.create()
         messageDialog.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
@@ -104,6 +107,11 @@ class BoomBoomAlert (val activity: Activity){
         myDialog.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         myDialog.show()
     }
+
+    fun simpleAlert(){
+
+    }
+
     companion object{
         lateinit var view: View
         lateinit var messageDialog: Dialog

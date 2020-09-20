@@ -10,7 +10,9 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         button.setOnClickListener {
-            BoomBoomAlert(this).quitMessage(R.mipmap.ic_launcher,resources.getString(R.string.app_name))
+            BoomBoomAlert(this).quitMessage(appname = resources.getString(R.string.app_name))
         }
+        button2.setOnClickListener { BoomBoomAlert(this).Single_Alert(message = "This is a single message") }
     }
+
 }

@@ -56,7 +56,7 @@
                     android:layout_height="wrap_content"
                     android:text="NO"
                     android:textColor="@color/failure_color"
-                    android:textSize="25dp"
+                    android:textSize="20dp"
                     android:textStyle="bold"
                     android:paddingHorizontal="10dp"
                     android:paddingVertical="5dp"
@@ -71,7 +71,7 @@
                     android:paddingVertical="5dp"
                     android:layout_marginLeft="5dp"
                     android:textColor="@color/success_color"
-                    android:textSize="25dp"
+                    android:textSize="20dp"
                     android:textStyle="bold"
                     android:layout_marginStart="5dp" />
             </LinearLayout>
