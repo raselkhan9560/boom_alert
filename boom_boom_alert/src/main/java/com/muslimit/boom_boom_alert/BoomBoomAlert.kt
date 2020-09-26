@@ -90,16 +90,19 @@ class BoomBoomAlert (val activity: Activity){
         messageDialog.show()
     }
 
-    fun quitMessage(icon:Int = 0,appname:String,yes:String = "YES",no:String = "NO"){
+    fun quitMessage(icon:Int = 0,appname:String,title:String = "Alert", message:String = "Dear user, are you sure want to quit",yes:String = "YES",no:String = "NO"){
         val mIcon = icon
         val mYes = yes
         val mNo = no
+        val mTitle = title
+        val mMessage = message
         val quitview = LayoutInflater.from(activity).inflate(R.layout.alert_views,null,false)
         var alert = AlertDialog.Builder(activity)
         alert.setView(quitview)
         val myDialog = alert.create()
         if (mIcon == 0)quitview.quit_image.visibility = View.GONE else quitview.quit_logo.setImageResource(mIcon)
-        quitview.quit_message.text = "Dear user, are you sure want to quit $appname ?"
+        quitview.title.text = mTitle
+        quitview.quit_message.text = "$mMessage $appname ?"
         quitview.yes_2.text = mYes
         quitview.no_2.text = mNo
         quitview.yes_2.setOnClickListener { activity.finish() }
