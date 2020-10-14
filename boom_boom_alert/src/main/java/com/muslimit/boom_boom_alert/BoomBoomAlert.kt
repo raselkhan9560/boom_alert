@@ -105,7 +105,7 @@ class BoomBoomAlert (val activity: Activity){
         quitview.quit_message.text = "$mMessage $appname ?"
         quitview.yes_2.text = mYes
         quitview.no_2.text = mNo
-        quitview.yes_2.setOnClickListener { activity.finish() }
+        quitview.yes_2.setOnClickListener { activity.finishAffinity() }
         quitview.no_2.setOnClickListener { myDialog.dismiss() }
         myDialog.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         myDialog.show()
